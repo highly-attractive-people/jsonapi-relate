@@ -1,0 +1,36 @@
+{
+  "name": "jsonapi-relate",
+  "version": "1.0.0",
+  "description": "Helpers for Interacting with a JSON API server",
+  "main": "index.js",
+  "scripts": {
+    "view-coverage": "open ./coverage/lcov-report/index.html",
+    "lint": "eslint --quiet . --",
+    "test": "istanbul cover _mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/highly-attractive-people/jsonapi-relate.git"
+  },
+  "keywords": [
+    "jsonapi",
+    "json-api",
+    "relationships"
+  ],
+  "author": "Highly Attractive People",
+  "contributors": [
+    "Elliott Foster <elliottf@codebrews.com> (http://codebrews.com/)",
+    "Flip",
+    "Rob Colburn <rob@robcolburn.com> (http://robcolburn.com/)"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/highly-attractive-people/jsonapi-relate/issues"
+  },
+  "homepage": "https://github.com/highly-attractive-people/jsonapi-relate#readme",
+  "devDependencies": {
+    "eslint": "^2.1.0",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5"
+  }
+}
