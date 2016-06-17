@@ -85,10 +85,17 @@ exports.getRelationships = getRelationships;
  */
 function getDeepRelationship(payload, parentResource, deepKey) {
   var path = deepKey.split('.');
-  var subResource = parentResource;
+  var subResources = parentResource;
   for (var i = 0; i < path.length; i++) {
-    subResource = subResource && getRelationship(payload, subResource, path[i]);
+    if (Array.isArray(subResources)) {
+      subResources = subResources.map(function (subResource) {
+        return subResource && getRelationship(payload, subResource, path[i]);
+      });
+    }
+    else {
+      subResources = subResources && getRelationship(payload, subResources, path[i]);
+    }
   }
-  return subResource;
+  return subResources;
 }
 exports.getDeepRelationship = getDeepRelationship;

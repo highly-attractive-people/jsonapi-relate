@@ -49,7 +49,7 @@ describe('getRelationship', function() {
     assert.equal(rel.id, 'test-id1');
   });
 
-  it('should get multiple relationships', function() {
+  it('should get plural relationships', function() {
     var resource = {
       relationships: {
         tests: {
@@ -112,7 +112,8 @@ describe('getDeepRelationship', function() {
           }
         }
       },
-      {type: 'worms', id: '3', name: 'jim'}
+      {type: 'worms', id: '3', name: 'jim'},
+      {type: 'cats', id: '4', name: 'furball'}
     ]
   };
   it('should get a deeply nested of relationship', function() {
@@ -140,5 +141,23 @@ describe('getDeepRelationship', function() {
     var rel = helpers.getDeepRelationship(payload, resource, 'cat.dog');
 
     assert(!rel);
+  });
+  it('should handle deeply nested plural relationships', function() {
+    var resource = {
+      relationships: {
+        cat: {
+          data: [
+            {type: 'cats', id: '1'},
+            {type: 'cats', id: '4'}
+          ]
+        }
+      }
+    };
+
+    var rel = helpers.getDeepRelationship(payload, resource, 'cat.bird.worm');
+
+    assert.equal(rel.length, 2);
+    assert.equal(rel[0].name, 'jim');
+    assert.equal(rel[1], undefined);
   });
 });
