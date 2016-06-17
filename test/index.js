@@ -113,7 +113,33 @@ describe('getDeepRelationship', function() {
         }
       },
       {type: 'worms', id: '3', name: 'jim'},
-      {type: 'cats', id: '4', name: 'furball'}
+      {type: 'cats', id: '4', name: 'furball'},
+      {type: 'cats', id: '5', name: 'tiger',
+        relationships: {
+          bird: {
+            data: [
+              {type: 'birds', id: '6'},
+              {type: 'birds', id: '7'}
+            ]
+          }
+        }
+      },
+      {type: 'birds', id: '6', name: 'mocking',
+        relationships: {
+          worm: {
+            data: {type: 'worms', id: '8'}
+          }
+        }
+      },
+      {type: 'birds', id: '7', name: 'owl',
+        relationships: {
+          worm: {
+            data: {type: 'worms', id: '9'}
+          }
+        }
+      },
+      {type: 'worms', id: '8', name: 'dwight'},
+      {type: 'worms', id: '9', name: 'pam'}
     ]
   };
   it('should get a deeply nested of relationship', function() {
@@ -142,13 +168,14 @@ describe('getDeepRelationship', function() {
 
     assert(!rel);
   });
-  it('should handle deeply nested plural relationships', function() {
+  it('should handle complex deeply nested plural relationships', function() {
     var resource = {
       relationships: {
         cat: {
           data: [
             {type: 'cats', id: '1'},
-            {type: 'cats', id: '4'}
+            {type: 'cats', id: '4'},
+            {type: 'cats', id: '5'}
           ]
         }
       }
@@ -156,8 +183,10 @@ describe('getDeepRelationship', function() {
 
     var rel = helpers.getDeepRelationship(payload, resource, 'cat.bird.worm');
 
-    assert.equal(rel.length, 2);
+    assert.equal(rel.length, 4);
     assert.equal(rel[0].name, 'jim');
     assert.equal(rel[1], undefined);
+    assert.equal(rel[2].name, 'dwight');
+    assert.equal(rel[3].name, 'pam');
   });
 });

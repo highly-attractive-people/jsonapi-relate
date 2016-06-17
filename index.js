@@ -88,9 +88,11 @@ function getDeepRelationship(payload, parentResource, deepKey) {
   var subResources = parentResource;
   for (var i = 0; i < path.length; i++) {
     if (Array.isArray(subResources)) {
-      subResources = subResources.map(function (subResource) {
-        return subResource && getRelationship(payload, subResource, path[i]);
-      });
+      subResources = subResources.reduce(function (results, subResource) {
+        return results.concat(
+          subResource && getRelationship(payload, subResource, path[i])
+        );
+      }, []);
     }
     else {
       subResources = subResources && getRelationship(payload, subResources, path[i]);
