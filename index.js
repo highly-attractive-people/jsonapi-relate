@@ -12,9 +12,9 @@
  *   The found included data
  */
 function getIncluded(payload, type, id) {
-  for (var i = payload.data.included.length - 1; i >= 0; i--) {
-    if (payload.data.included[i].id === id && payload.data.included[i].type === type) {
-      return payload.data.included[i];
+  for (var i = payload.included.length - 1; i >= 0; i--) {
+    if (payload.included[i].id === id && payload.included[i].type === type) {
+      return payload.included[i];
     }
   }
 }

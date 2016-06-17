@@ -5,9 +5,7 @@ var helpers = require('../');
 describe('getIncluded', function() {
   it('should throw an exception for missing includes', function() {
     var payload = {
-      data: {
-        included: []
-      }
+      included: []
     };
     var ret = helpers.getIncluded(payload, 'tests', 'test-id');
 
@@ -16,11 +14,9 @@ describe('getIncluded', function() {
 
   it('should return the included object', function() {
     var payload = {
-      data: {
-        included: [
-          {type: 'tests', id: 'test-id'}
-        ]
-      }
+      included: [
+        {type: 'tests', id: 'test-id'}
+      ]
     };
 
     var ret = helpers.getIncluded(payload, 'tests', 'test-id');
@@ -32,13 +28,11 @@ describe('getIncluded', function() {
 
 describe('getRelationship', function() {
   var payload = {
-    data: {
-      included: [
-        {type: 'tests', id: 'test-id1'},
-        {type: 'tests', id: 'test-id2'},
-        {type: 'ankhs', id: 'ankh-1'}
-      ]
-    }
+    included: [
+      {type: 'tests', id: 'test-id1'},
+      {type: 'tests', id: 'test-id2'},
+      {type: 'ankhs', id: 'ankh-1'}
+    ]
   };
   it('should get a singular relationship', function() {
     var resource = {
@@ -77,12 +71,10 @@ describe('getRelationship', function() {
 
 describe('getRelationships', function() {
   var payload = {
-    data: {
-      included: [
-        {type: 'cats', id: '1', name: 'kitty'},
-        {type: 'dogs', id: '2', name: 'sam'}
-      ]
-    }
+    included: [
+      {type: 'cats', id: '1', name: 'kitty'},
+      {type: 'dogs', id: '2', name: 'sam'}
+    ]
   };
   it('should get a set of relationships', function() {
     var resource = {
@@ -105,25 +97,23 @@ describe('getRelationships', function() {
 
 describe('getDeepRelationship', function() {
   var payload = {
-    data: {
-      included: [
-        {type: 'cats', id: '1', name: 'kitty',
-          relationships: {
-            bird: {
-              data: {type: 'birds', id: '2'}
-            }
+    included: [
+      {type: 'cats', id: '1', name: 'kitty',
+        relationships: {
+          bird: {
+            data: {type: 'birds', id: '2'}
           }
-        },
-        {type: 'birds', id: '2', name: 'jay',
-          relationships: {
-            worm: {
-              data: {type: 'worms', id: '3'}
-            }
+        }
+      },
+      {type: 'birds', id: '2', name: 'jay',
+        relationships: {
+          worm: {
+            data: {type: 'worms', id: '3'}
           }
-        },
-        {type: 'worms', id: '3', name: 'jim'}
-      ]
-    }
+        }
+      },
+      {type: 'worms', id: '3', name: 'jim'}
+    ]
   };
   it('should get a deeply nested of relationship', function() {
     var resource = {
