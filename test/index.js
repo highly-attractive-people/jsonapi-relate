@@ -67,6 +67,36 @@ describe('getRelationship', function() {
     assert.equal(rel[0].type, 'tests');
     assert.equal(rel[1].type, 'tests');
   });
+
+  it('should get an empty relationship', function() {
+    var resource = {
+      relationships: {
+        missing: {
+          data: {type: 'missing', id: 'missing-id1'},
+        }
+      }
+    };
+
+    var rel = helpers.getRelationship(payload, resource, 'missing');
+
+    assert.equal(rel, null);
+  });
+
+  it('should get an empty plural relationship', function() {
+    var resource = {
+      relationships: {
+        missing: {
+          data: [
+            {type: 'missing', id: 'missing-id1'},
+          ]
+        }
+      }
+    };
+
+    var rel = helpers.getRelationship(payload, resource, 'missing');
+
+    assert.equal(rel.length, 0);
+  });
 });
 
 describe('getRelationships', function() {

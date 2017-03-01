@@ -44,7 +44,7 @@ function getRelationship(payload, resource, key) {
     ? getIncluded(payload, relationships.data.type, relationships.data.id)
     : relationships.data.map(function (relationship) {
       return getIncluded(payload, relationship.type, relationship.id);
-    });
+    }).filter(function(entity) { return entity });
 }
 exports.getRelationship = getRelationship;
 
