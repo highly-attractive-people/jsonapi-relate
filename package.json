@@ -1,6 +1,6 @@
 {
   "name": "jsonapi-relate",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Helpers for Interacting with a JSON API server",
   "main": "index.js",
   "scripts": {
